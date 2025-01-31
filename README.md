@@ -1,48 +1,69 @@
 # Express Proxy Server
 
-This is a simple proxy server built using Express and Axios. It forwards requests to a specified target URL, allowing users to make requests via this proxy.
+This is a simple yet customizable proxy server built using **Express** and **Axios**. It allows users to forward requests to a specified target URL, making it a great choice for API integration, testing, or routing requests through a secure server.
 
 ## Features
-- Accepts any HTTP method (GET, POST, etc.)
-- Forwards query parameters to the target URL
-- Returns JSON responses
-- Logs each request
+- **Supports any HTTP method**: GET, POST, PUT, DELETE, PATCH, etc.
+- **Forward query parameters**: Any query parameters provided in the request will be forwarded to the target URL.
+- **JSON Response**: Returns JSON responses from the target server, or custom error messages if something goes wrong.
+- **Request Logging**: Logs every incoming request with details to the console.
+- **Extensible**: Can be easily modified to forward request headers or request bodies.
 
 ## Prerequisites
-Make sure you have Node.js installed on your system.
+Before you begin, ensure that you have **Node.js** installed on your system. If you don’t have it installed, you can download and install it from [Node.js official website](https://nodejs.org/).
 
 ## Installation
-1. Clone this repository or copy the script.
-2. Install dependencies:
+Follow these steps to get your Express Proxy Server running:
+
+1. **Clone the repository** or copy the script into your project folder.
+
+2. **Install dependencies**:
+   In the project directory, run the following command to install required dependencies (`express` and `axios`):
    ```sh
    npm install express axios
    ```
 
+3. **Create `.gitignore`** (Optional, if you plan to use version control):
+   Make sure to add `node_modules/` and `package-lock.json` to `.gitignore` to avoid committing them to version control.
+
 ## Usage
-1. Start the server:
+
+### Start the server:
+1. To run the server, use the following command:
    ```sh
    node server.js
    ```
-   The server will run on `http://localhost:233`.
+   The server will start listening on port **233** (or any other port defined in your code).
 
-2. Make a request to the proxy:
+2. The server will be accessible at:
    ```sh
-   http://localhost:233/url?url=https://api.example.com/data
+   http://localhost:233
    ```
-   This will fetch data from `https://api.example.com/data`.
+
+### Make a request to the proxy:
+To forward a request, use the following URL structure:
+
+```sh
+http://localhost:233/url?url=https://api.example.com/data
+```
+
+This will forward your request to the target URL (e.g., `https://api.example.com/data`), and the response will be returned as JSON.
 
 ## API Endpoint
-### `GET /url`
-**Query Parameters:**
-- `url` (string, required) - The target URL to request.
-- Additional query parameters will be forwarded to the target URL.
 
-**Example Request:**
+### `GET /url`
+This endpoint forwards the incoming request to the target URL specified in the `url` query parameter.
+
+#### Query Parameters:
+- `url` (string, required): The target URL to forward the request to. This should be a valid URL.
+- Additional query parameters (optional): Any additional query parameters will be forwarded to the target URL.
+
+#### Example Request:
 ```sh
 GET http://localhost:233/url?url=https://jsonplaceholder.typicode.com/posts
 ```
 
-**Example Response:**
+#### Example Response:
 ```json
 [
   {
@@ -53,27 +74,49 @@ GET http://localhost:233/url?url=https://jsonplaceholder.typicode.com/posts
   }
 ]
 ```
-### Cloudflare Workers
+
+### Cloudflare Workers Deployment
 
 [![Deploy with Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/Aazann/Express-Proxy-Server)
 
-### Vercel
+You can deploy the proxy server directly to Cloudflare Workers by clicking the button above.
+
+### Vercel Deployment
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Aazann/Express-Proxy-Server)
 
+Deploy the proxy server to **Vercel** with the button above.
 
 ## Error Handling
-If an error occurs while fetching the target URL, the server returns:
+If an error occurs while making the request to the target URL (e.g., if the target server is down or the URL is invalid), the proxy server returns the following error message:
+
 ```json
 {
   "error": "Error making request to target URL"
 }
 ```
 
+Additionally, if the `url` query parameter is missing, the server responds with:
+
+```json
+{
+  "error": "Missing 'url' query parameter"
+}
+```
+
 ## Notes
-- The proxy currently only forwards query parameters. Headers and request bodies are not forwarded.
-- You can modify the script to include headers and body forwarding.
+- **Forwarding Headers and Request Bodies**: Currently, only query parameters are forwarded to the target URL. If you need to forward headers or request bodies (e.g., for POST or PUT requests), the script can be modified to support these.
+- **Security Considerations**: Ensure that you validate or sanitize input before passing it to any external services to avoid security risks, such as SSRF (Server Side Request Forgery).
 
 ## License
-This project is licensed under the Apache 2.0 License.
+This project is licensed under the **Apache 2.0 License**.
 
+## Contributing
+If you'd like to contribute to this project, feel free to fork it and submit a pull request. Here's how you can contribute:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes and commit them (`git commit -am 'Add new feature'`).
+4. Push to your branch (`git push origin feature-branch`).
+5. Submit a pull request.
+
+---
