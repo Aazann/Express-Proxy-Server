@@ -54,6 +54,22 @@ GET http://localhost:233/url?url=https://jsonplaceholder.typicode.com/posts
 ]
 ```
 
+## Deployment on Vercel
+This proxy can be deployed on Vercel with a few modifications:
+1. Create a `vercel.json` file with the following content:
+   ```json
+   {
+     "routes": [
+       { "src": "/url", "dest": "/api/server.js" }
+     ]
+   }
+   ```
+2. Move your Express server code into an `api/` directory.
+3. Deploy using the Vercel CLI:
+   ```sh
+   vercel
+   ```
+
 ## Error Handling
 If an error occurs while fetching the target URL, the server returns:
 ```json
