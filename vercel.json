@@ -1,0 +1,19 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "src/index.ts",
+        "use": "@vercel/node",
+        "config": {
+          "maxDuration": 10
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/url",
+        "dest": "/src/index.ts"
+      }
+    ]
+  }
+  
