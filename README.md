@@ -29,13 +29,29 @@ Follow these steps to get your Express Proxy Server running:
 ## Usage
 
 ### Start the server:
-1. To run the server, use the following command:
-   ```sh
-   node server.js
-   ```
-   The server will start listening on port **233** (or any other port defined in your code).
 
-2. The server will be accessible at:
+1. **Install Dependencies**:
+   First, make sure you've installed all required dependencies:
+   ```bash
+   npm install
+   ```
+
+2. **Build the Project**:
+   Since you're working with TypeScript, you need to compile the TypeScript files before running the server. You can do this by running the following command:
+   ```bash
+   npm run build
+   ```
+
+3. **Run the Server**:
+   After the build, start the server with the compiled JavaScript:
+   ```bash
+   npm start
+   ```
+
+   This will start the server on **port 233** (or any other port defined in your code). If you are running in development mode, you can use `npm run dev` to run the server directly from TypeScript without compiling.
+
+4. **Server Access**:
+   The server will be accessible at:
    ```sh
    http://localhost:233
    ```
